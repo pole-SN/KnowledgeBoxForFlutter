@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: mode,
-        home: const KnowledgeHomePage(title: 'Flutter Demo Home Page'),
+        home: const KnowledgeHomePage(title: 'Knowledge Box'),
         routes: <String, WidgetBuilder>{
           // '/my-page-1' : (BuildContext context) => new MyPage1(),
           '/pokelist': (BuildContext context) => new PokeListPage(),
