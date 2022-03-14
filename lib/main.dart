@@ -6,12 +6,14 @@ import 'view_model/theme_mode_notifier.dart';
 import 'view_model/pokemons_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'view_model/favorites_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences pref = await SharedPreferences.getInstance();
   final themeModeNotifier = ThemeModeNotifier(pref);
   final pokemonsNotifier = PokemonsNotifier();
+  final favoritesNotifier = FavoritesNotifier();
   runApp(
     MultiProvider(
       providers: [
@@ -20,6 +22,9 @@ void main() async {
         ),
         ChangeNotifierProvider<PokemonsNotifier>(
           create: (context) => pokemonsNotifier,
+        ),
+        ChangeNotifierProvider<FavoritesNotifier>(
+          create: (context) => favoritesNotifier,
         ),
       ],
       child: const MyApp(),
