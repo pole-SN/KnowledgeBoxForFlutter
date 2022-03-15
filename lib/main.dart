@@ -44,6 +44,7 @@ class _MyAppState extends State<MyApp> {
     return Consumer<ThemeModeNotifier>(
       builder: (context, mode, child) => MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: mode.mode,

@@ -56,10 +56,12 @@ class _PokeListState extends State<PokeList> {
     return Consumer<FavoritesNotifier>(
       builder: (context, favs, child) => Column(
         children: [
-          Container(
-            height: 24,
-            alignment: Alignment.topRight,
-            child: IconButton(
+          ListTile(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            ),
+            trailing: IconButton(
               padding: const EdgeInsets.all(0),
               icon: isFavoriteMode
                   ? const Icon(Icons.auto_awesome, color: Colors.orangeAccent)

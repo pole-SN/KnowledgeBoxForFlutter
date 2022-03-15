@@ -1,20 +1,47 @@
 import 'package:flutter/material.dart';
 import '../model/favorite.dart';
+import '../model/favorites_db.dart';
 
 class FavoritesNotifier extends ChangeNotifier {
   final List<Favorite> _favs = [];
 
   List<Favorite> get favs => _favs;
 
-  void add(Favorite fav) {
-    favs.add(fav);
+  FavoritesNotifier() {
+    syncDb();
+  }
+
+  void toggle(Favorite fav) {
+    if (isExist(fav.pokeId)) {
+      delete(fav.pokeId);
+    } else {
+      add(fav);
+    }
+  }
+
+  bool isExist(int id) {
+    if (_favs.indexWhere((fav) => fav.pokeId == id) < 0) {
+      return false;
+    }
+    return true;
+  }
+
+  void syncDb() async {
+    FavoritesDb.read().then(
+      (val) => _favs
+        ..clear()
+        ..addAll(val),
+    );
     notifyListeners();
   }
 
-  void delete(Favorite fav) {
-    var res = favs.remove(fav);
-    if (res) {
-      notifyListeners();
-    }
+  void add(Favorite fav) async {
+    await FavoritesDb.create(fav);
+    syncDb();
+  }
+
+  void delete(int id) async {
+    await FavoritesDb.delete(id);
+    syncDb();
   }
 }

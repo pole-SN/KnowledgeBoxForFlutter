@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../view_model/favorites_notifier.dart';
+import '../../model/favorite.dart';
 import '../../model/pokemon.dart';
 import '../../const/poke_type_colors.dart';
 
@@ -21,8 +22,12 @@ class PokeDetailPage extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                 ),
                 trailing: IconButton(
-                  icon: const Icon(Icons.star_outline),
-                  onPressed: () => {},
+                  icon: favs.isExist(poke.id)
+                      ? const Icon(Icons.star, color: Colors.orangeAccent)
+                      : const Icon(Icons.star_outline),
+                  onPressed: () => {
+                    favs.toggle(Favorite(pokeId: poke.id)),
+                  },
                 ),
               ),
               const Spacer(),
