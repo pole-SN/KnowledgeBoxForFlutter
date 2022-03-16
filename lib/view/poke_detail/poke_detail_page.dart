@@ -4,6 +4,7 @@ import '../../view_model/favorites_notifier.dart';
 import '../../model/favorite.dart';
 import '../../model/pokemon.dart';
 import '../../const/poke_type_colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PokeDetailPage extends StatelessWidget {
   const PokeDetailPage({Key? key, required this.poke}) : super(key: key);
@@ -35,10 +36,13 @@ class PokeDetailPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(32),
-                    child: Image.network(
-                      poke.imageUrl,
-                      height: 100,
-                      width: 100,
+                    child: Hero(
+                      tag: poke.name,
+                      child: CachedNetworkImage(
+                        imageUrl: poke.imageUrl,
+                        height: 200,
+                        width: 200,
+                      ),
                     ),
                   ),
                   Container(
