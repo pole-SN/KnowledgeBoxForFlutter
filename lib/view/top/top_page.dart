@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../poke_list/settings.dart';
+import 'settings.dart';
 
 class KnowledgeHomePage extends StatefulWidget {
   const KnowledgeHomePage({Key? key, required this.title}) : super(key: key);
