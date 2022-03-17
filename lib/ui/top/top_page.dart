@@ -30,7 +30,8 @@ class _KnowledgeHomePageState extends State<KnowledgeHomePage> {
         child: currentbnb == 0
             ? ListView(
                 children: [
-                  _menuItem(context, "Todo tool", Icon(Icons.settings), "todo"),
+                  _menuItem(
+                      context, "Todo tool", Icon(Icons.settings), "/todolist"),
                   _menuItem(context, "Poke API", Icon(Icons.api), "/pokelist"),
                   _menuItem(context, "メニュー3", Icon(Icons.room), "todo"),
                   _menuItem(

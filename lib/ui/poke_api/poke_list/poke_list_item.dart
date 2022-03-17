@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../poke_detail/poke_detail_page.dart';
-import '../../model/pokemon.dart';
-import '../../const/poke_type_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../poke_detail/poke_detail_page.dart';
+import '../../../model/poke_api/pokemon.dart';
+import '../../../const/poke_type_colors.dart';
 
 class PokeListItem extends StatelessWidget {
   const PokeListItem({Key? key, required this.poke}) : super(key: key);

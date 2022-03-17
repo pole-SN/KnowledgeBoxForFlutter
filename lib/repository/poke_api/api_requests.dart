@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'pokemon.dart';
-import '../const/pokeapi.dart';
+import '../../model/poke_api/pokemon.dart';
+import '../../const/pokeapi.dart';
 
 Future<Pokemon> fetchPokemon(int id) async {
   final res = await http.get(Uri.parse('$pokeApiRoute/pokemon/$id'));

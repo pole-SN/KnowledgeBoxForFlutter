@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../model/favorite.dart';
-import '../model/favorites_db.dart';
+import '../../model/poke_api/favorite.dart';
+import '../../repository/poke_api/favorites_crud.dart';
 
 class FavoritesNotifier extends ChangeNotifier {
   final List<Favorite> _favs = [];
@@ -27,7 +27,7 @@ class FavoritesNotifier extends ChangeNotifier {
   }
 
   void syncDb() async {
-    FavoritesDb.read().then(
+    FavoritesCURD.read().then(
       (val) => _favs
         ..clear()
         ..addAll(val),
@@ -36,12 +36,12 @@ class FavoritesNotifier extends ChangeNotifier {
   }
 
   void add(Favorite fav) async {
-    await FavoritesDb.create(fav);
+    await FavoritesCURD.create(fav);
     syncDb();
   }
 
   void delete(int id) async {
-    await FavoritesDb.delete(id);
+    await FavoritesCURD.delete(id);
     syncDb();
   }
 }
