@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'todo_list.dart';
+import '../../view_model/todo/todos_notifier.dart';
+import 'package:provider/provider.dart';
 
 class TodoListPage extends StatefulWidget {
   const TodoListPage({Key? key}) : super(key: key);
@@ -13,12 +15,23 @@ class _TodoListPageState extends State<TodoListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final todo = Provider.of<TodosNotifier>(context);
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Todo List",
+        ),
+      ),
       body: SafeArea(
-        child: TodoList(navIndex: navIndex),
+        child: Container(
+          color: Colors.grey.withOpacity(0.2),
+          child: TodoList(navIndex: navIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => {
+          todo.changeNav(index),
           setState(
             () => navIndex = index,
           )
@@ -30,16 +43,12 @@ class _TodoListPageState extends State<TodoListPage> {
             label: 'All',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.auto_awesome_outlined),
-            label: 'High',
+            icon: Icon(Icons.check_box_outlined),
+            label: 'Completed',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.auto_awesome_outlined),
-            label: 'Middle',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.auto_awesome_outlined),
-            label: 'Low',
+            icon: Icon(Icons.check_box_outline_blank),
+            label: 'Incomplete',
           ),
         ],
       ),

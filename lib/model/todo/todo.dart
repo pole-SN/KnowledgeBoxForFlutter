@@ -1,25 +1,45 @@
+import "package:intl/intl.dart";
+import 'package:intl/date_symbol_data_local.dart';
+import '../../const/datetime.dart';
+
 class Todo {
-  final int todoId;
+  final int? todoId;
   final String title;
-  final String description;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String? description;
+  final int isCompleted;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Todo({
-    required this.todoId,
+    this.todoId,
     required this.title,
-    required this.description,
-    required this.createdAt,
-    required this.updatedAt,
+    this.description,
+    required this.isCompleted,
+    this.createdAt,
+    this.updatedAt,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> createDataToMap() {
+    initializeDateFormatting("ja_JP");
     return {
       'id': todoId,
       'title': title,
       'description': description,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
+      'is_completed': isCompleted,
+      'created_at': DateFormat(df).format(DateTime.now()),
+      'updated_at': DateFormat(df).format(DateTime.now()),
+    };
+  }
+
+  Map<String, dynamic> updateDataToMap() {
+    initializeDateFormatting("ja_JP");
+    return {
+      'id': todoId,
+      'title': title,
+      'description': description,
+      'is_completed': isCompleted,
+      'created_at': DateFormat(df).format(createdAt!),
+      'updated_at': DateFormat(df).format(updatedAt!),
     };
   }
 }
