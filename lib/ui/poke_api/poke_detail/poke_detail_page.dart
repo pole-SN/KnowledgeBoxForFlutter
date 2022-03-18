@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../view_model/favorites_notifier.dart';
-import '../../model/favorite.dart';
-import '../../model/pokemon.dart';
-import '../../const/poke_type_colors.dart';
+import '../../../view_model/poke_api/favorites_notifier.dart';
+import '../../../model/poke_api/favorite.dart';
+import '../../../model/poke_api/pokemon.dart';
+import '../../../const/poke_type_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class PokeDetailPage extends StatelessWidget {

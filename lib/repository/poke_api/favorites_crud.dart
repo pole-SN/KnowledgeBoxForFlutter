@@ -1,9 +1,9 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'favorite.dart';
-import '../const/db.dart';
+import '../../model/poke_api/favorite.dart';
+import '../../const/database.dart';
 
-class FavoritesDb {
+class FavoritesCURD {
   static Future<Database> openDb() async {
     return await openDatabase(
       join(await getDatabasesPath(), favFileName),

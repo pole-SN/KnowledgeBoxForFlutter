@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../view_model/pokemons_notifier.dart';
-import '../../view_model/favorites_notifier.dart';
-import '../../const/pokeapi.dart';
 import 'poke_list_item.dart';
 import 'poke_grid_item.dart';
-import '../../model/favorite.dart';
+import '../../../view_model/poke_api/pokemons_notifier.dart';
+import '../../../view_model/poke_api/favorites_notifier.dart';
+import '../../../const/pokeapi.dart';
+import '../../../model/poke_api/favorite.dart';
 
 class PokeList extends StatefulWidget {
   const PokeList({Key? key, required this.isFavoriteMode}) : super(key: key);

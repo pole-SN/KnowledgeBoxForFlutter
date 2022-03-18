@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'view/top/top_page.dart';
-import 'view/poke_list/poke_list_page.dart';
-import 'view/theme_mode_selection/theme_mode_selection_page.dart';
-import 'view_model/theme_mode_notifier.dart';
-import 'view_model/pokemons_notifier.dart';
+import 'ui/top/top_page.dart';
+import 'ui/poke_api/poke_list/poke_list_page.dart';
+import 'ui/todo/todo_list_page.dart';
+import 'ui/settings/theme_mode_selection/theme_mode_selection_page.dart';
+import 'view_model/settings/theme_mode_notifier.dart';
+import 'view_model/poke_api/pokemons_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'view_model/favorites_notifier.dart';
+import 'view_model/poke_api/favorites_notifier.dart';
+import 'view_model/todo/todos_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +16,7 @@ void main() async {
   final themeModeNotifier = ThemeModeNotifier(pref);
   final pokemonsNotifier = PokemonsNotifier();
   final favoritesNotifier = FavoritesNotifier();
+  final todosNotifier = TodosNotifier();
   runApp(
     MultiProvider(
       providers: [
@@ -25,6 +28,9 @@ void main() async {
         ),
         ChangeNotifierProvider<FavoritesNotifier>(
           create: (context) => favoritesNotifier,
+        ),
+        ChangeNotifierProvider<TodosNotifier>(
+          create: (context) => todosNotifier,
         ),
       ],
       child: const MyApp(),
@@ -50,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         themeMode: mode.mode,
         home: const KnowledgeHomePage(title: 'Knowledge Box'),
         routes: <String, WidgetBuilder>{
+          '/todolist': (context) => new TodoListPage(),
           '/pokelist': (context) => new PokeListPage(),
           '/themeselection': (context) =>
               new ThemeModeSelectionPage(mode: mode.mode),

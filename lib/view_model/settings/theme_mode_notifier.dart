@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../model/shared_preferences.dart';
+import '../../repository/poke_api/theme_mode_sp.dart';
 
 class ThemeModeNotifier extends ChangeNotifier {
   late ThemeMode _themeMode;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../model/pokemon.dart';
-import '../model/fetch_pokemon.dart';
+import '../../model/poke_api/pokemon.dart';
+import '../../repository/poke_api/api_requests.dart';
 
 class PokemonsNotifier extends ChangeNotifier {
   final Map<int, Pokemon?> _pokeMap = {};

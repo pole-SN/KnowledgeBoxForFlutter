@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../theme_mode_selection/theme_mode_selection_page.dart';
-import '../../view_model/theme_mode_notifier.dart';
+import '../settings/theme_mode_selection/theme_mode_selection_page.dart';
+import '../../view_model/settings/theme_mode_notifier.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);

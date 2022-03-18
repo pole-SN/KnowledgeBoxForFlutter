@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../model/pokemon.dart';
+import '../../../model/poke_api/pokemon.dart';
 import '../poke_detail/poke_detail_page.dart';
-import '../../const/poke_type_colors.dart';
+import '../../../const/poke_type_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class PokeGridItem extends StatelessWidget {
