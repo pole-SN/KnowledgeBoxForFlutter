@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'todo_list.dart';
-import '../../view_model/todo/todos_notifier.dart';
+import '../../../view_model/todo/todos_notifier.dart';
 import 'package:provider/provider.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -16,6 +16,7 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     final todo = Provider.of<TodosNotifier>(context);
+    todo.changeNav(navIndex);
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +27,7 @@ class _TodoListPageState extends State<TodoListPage> {
       body: SafeArea(
         child: Container(
           color: Colors.grey.withOpacity(0.2),
-          child: TodoList(navIndex: navIndex),
+          child: const TodoList(),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -48,7 +49,7 @@ class _TodoListPageState extends State<TodoListPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.check_box_outline_blank),
-            label: 'Incomplete',
+            label: 'Uncompleted',
           ),
         ],
       ),

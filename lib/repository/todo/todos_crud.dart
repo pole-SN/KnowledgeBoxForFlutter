@@ -38,9 +38,9 @@ class TodosCURD {
     );
   }
 
-  static Future<List<Todo>> read(int navIndex) async {
+  static Future<List<Todo>> read() async {
     var db = await openDb();
-    final List<Map<String, dynamic>> maps = await _getQuery(navIndex, db);
+    final List<Map<String, dynamic>> maps = await _getQuery(db);
     return List.generate(
       maps.length,
       (index) {
@@ -56,33 +56,11 @@ class TodosCURD {
     );
   }
 
-  static _getQuery(int navIndex, db) {
-    switch (navIndex) {
-      case 0:
-        return db.query(
-          todoTableName,
-          orderBy: "id DESC",
-        );
-      case 1:
-        return db.query(
-          todoTableName,
-          orderBy: "id DESC",
-          where: "is_completed=?",
-          whereArgs: [1],
-        );
-      case 2:
-        return db.query(
-          todoTableName,
-          orderBy: "id DESC",
-          where: "is_completed=?",
-          whereArgs: [0],
-        );
-      default:
-        return db.query(
-          todoTableName,
-          orderBy: "id DESC",
-        );
-    }
+  static _getQuery(db) {
+    return db.query(
+      todoTableName,
+      orderBy: "id DESC",
+    );
   }
 
   static Future<void> delete(int todoId) async {

@@ -30,14 +30,12 @@ class _KnowledgeHomePageState extends State<KnowledgeHomePage> {
         child: currentbnb == 0
             ? ListView(
                 children: [
-                  _menuItem(
-                      context, "Todo tool", Icon(Icons.settings), "/todolist"),
+                  _menuItem(context, "Todo tool",
+                      Icon(Icons.check_box_outlined), "/todolist"),
                   _menuItem(context, "Poke API", Icon(Icons.api), "/pokelist"),
-                  _menuItem(context, "メニュー3", Icon(Icons.room), "todo"),
-                  _menuItem(
-                      context, "メニュー4", Icon(Icons.local_shipping), "todo"),
-                  _menuItem(context, "メニュー5", Icon(Icons.airplanemode_active),
-                      "todo"),
+                  _menuItem(context, "メニュー3", Icon(Icons.room), "TBD"),
+                  _menuItem(context, "メニュー4", Icon(Icons.room), "TBD"),
+                  _menuItem(context, "メニュー5", Icon(Icons.room), "TBD"),
                 ],
               )
             : const Settings(),

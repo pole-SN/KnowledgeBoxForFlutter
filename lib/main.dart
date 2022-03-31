@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ui/top/top_page.dart';
 import 'ui/poke_api/poke_list/poke_list_page.dart';
-import 'ui/todo/todo_list_page.dart';
+import 'ui/todo/todo_list/todo_list_page.dart';
 import 'ui/settings/theme_mode_selection/theme_mode_selection_page.dart';
 import 'view_model/settings/theme_mode_notifier.dart';
 import 'view_model/poke_api/pokemons_notifier.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'view_model/poke_api/favorites_notifier.dart';
 import 'view_model/todo/todos_notifier.dart';
 
