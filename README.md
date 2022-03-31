@@ -1,16 +1,29 @@
 # knowledgebox
 
-A new Flutter project.
+自作のFlutterサンプル  
 
-## Getting Started
+以下学習課題
+・API連携  
+・ローカルDB  
+・UI実装  
+・アーキテクチャ検討  
+・汎用ライブラリ  
 
-This project is a starting point for a Flutter application.
+## コマンドなど
 
-A few resources to get you started if this is your first Flutter project:
+```
+アプリベース作成
+flutter create xxx
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+アプリビルド
+flutter run
+flutter run --release
+flutter run --profile
+flutter run --verbose
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+環境検証
+flutter doctor
+
+Flutter更新
+flutter upgrade
+```
