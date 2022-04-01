@@ -34,6 +34,7 @@ class TodosNotifier extends ChangeNotifier {
         isCompleted: todo.isCompleted == 0 ? 1 : 0,
         createdAt: todo.createdAt,
         updatedAt: DateTime.now(),
+        deleting: 0,
       ),
     );
   }

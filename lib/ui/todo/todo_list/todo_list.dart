@@ -48,8 +48,6 @@ class _TodoListState extends State<TodoList> {
                     notifier.add(
                       Todo(
                         title: _titleController.text,
-                        isCompleted: 0,
-                        createdAt: DateTime.now(),
                       ),
                     ),
                     _titleController.text = "",
@@ -68,47 +66,9 @@ class _TodoListState extends State<TodoList> {
                     (notifier.getNavIndex() == 2 &&
                         notifier.todos[index].isCompleted == 0)) {
                   return Card(
-                    child: ListTile(
-                      isThreeLine: true,
-                      title: notifier.todos[index].isCompleted == 0
-                          ? Text(notifier.todos[index].title)
-                          : Text(
-                              notifier.todos[index].title,
-                              style: const TextStyle(
-                                color: Colors.grey,
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                            ),
-                      subtitle: Text(
-                        "作成日時：" +
-                            DateFormat(df)
-                                .format(notifier.todos[index].createdAt!) +
-                            "\n" +
-                            "更新日時：" +
-                            DateFormat(df)
-                                .format(notifier.todos[index].updatedAt!),
-                      ),
-                      trailing: IconButton(
-                        icon: notifier.todos[index].isCompleted == 0
-                            ? const Icon(Icons.check_box_outline_blank)
-                            : const Icon(Icons.check_box_outlined,
-                                color: Colors.green),
-                        onPressed: () => {
-                          notifier.changeState(notifier.todos[index]),
-                        },
-                      ),
-                      onTap: () => {
-                        _focusNode.unfocus(),
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => TodoDetailPage(
-                              notifier: notifier,
-                              index: index,
-                            ),
-                          ),
-                        ),
-                      },
-                    ),
+                    child: notifier.todos[index].deleting == 0
+                        ? _normalListTile(notifier, index)
+                        : _deletingListTile(notifier, index),
                   );
                 } else {
                   return Container();
@@ -118,6 +78,80 @@ class _TodoListState extends State<TodoList> {
           ),
         ],
       ),
+    );
+  }
+
+  ListTile _normalListTile(TodosNotifier notifier, int index) {
+    return ListTile(
+      isThreeLine: true,
+      title: _getTitleWidget(notifier, index),
+      subtitle: _getDateTimesWidget(notifier, index),
+      trailing: IconButton(
+        icon: notifier.todos[index].isCompleted == 0
+            ? const Icon(Icons.check_box_outline_blank)
+            : const Icon(Icons.check_box_outlined, color: Colors.green),
+        onPressed: () => {
+          notifier.changeState(notifier.todos[index]),
+        },
+      ),
+      onTap: () => {
+        _focusNode.unfocus(),
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) => TodoDetailPage(
+              notifier: notifier,
+              index: index,
+            ),
+          ),
+        ),
+      },
+    );
+  }
+
+  ListTile _deletingListTile(TodosNotifier notifier, int index) {
+    return ListTile(
+      tileColor: Colors.grey.withOpacity(0.6),
+      isThreeLine: true,
+      title: _getTitleWidget(notifier, index),
+      subtitle: _getDateTimesWidget(notifier, index),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          SizedBox(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            ),
+            height: 20.0,
+            width: 20.0,
+          ),
+          Text(
+            "削除中",
+            style: TextStyle(color: Colors.red),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Text _getTitleWidget(TodosNotifier notifier, int index) {
+    return notifier.todos[index].isCompleted == 0
+        ? Text(notifier.todos[index].title)
+        : Text(
+            notifier.todos[index].title,
+            style: const TextStyle(
+              color: Colors.grey,
+              decoration: TextDecoration.lineThrough,
+            ),
+          );
+  }
+
+  Text _getDateTimesWidget(TodosNotifier notifier, int index) {
+    return Text(
+      "作成日時：" +
+          DateFormat(df).format(notifier.todos[index].createdAt!) +
+          "\n" +
+          "更新日時：" +
+          DateFormat(df).format(notifier.todos[index].updatedAt!),
     );
   }
 }

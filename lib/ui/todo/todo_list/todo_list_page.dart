@@ -23,6 +23,7 @@ class _TodoListPageState extends State<TodoListPage> {
         title: const Text(
           "Todo List",
         ),
+        backgroundColor: Colors.black.withOpacity(0.2),
       ),
       body: SafeArea(
         child: Container(
