@@ -11,7 +11,7 @@ class TodosCURD {
       join(await getDatabasesPath(), todoFileName),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE $todoTableName(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, is_completed INTEGER, created_at TEXT, updated_at TEXT)',
+          'CREATE TABLE $todoTableName(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, is_completed INTEGER, created_at TEXT, updated_at TEXT, deleting INTEGER)',
         );
       },
       version: 1,
@@ -51,6 +51,7 @@ class TodosCURD {
           isCompleted: maps[index]['is_completed'],
           createdAt: DateFormat(df).parseStrict(maps[index]['created_at']),
           updatedAt: DateFormat(df).parseStrict(maps[index]['updated_at']),
+          deleting: maps[index]['deleting'],
         );
       },
     );

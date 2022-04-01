@@ -6,28 +6,30 @@ class Todo {
   final int? todoId;
   final String title;
   final String? description;
-  final int isCompleted;
+  final int? isCompleted;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final int? deleting;
 
   Todo({
     this.todoId,
     required this.title,
     this.description,
-    required this.isCompleted,
+    this.isCompleted,
     this.createdAt,
     this.updatedAt,
+    this.deleting,
   });
 
   Map<String, dynamic> createDataToMap() {
     initializeDateFormatting("ja_JP");
     return {
-      'id': todoId,
       'title': title,
-      'description': description,
-      'is_completed': isCompleted,
+      'description': "",
+      'is_completed': 0,
       'created_at': DateFormat(df).format(DateTime.now()),
       'updated_at': DateFormat(df).format(DateTime.now()),
+      'deleting': 0,
     };
   }
 
@@ -40,6 +42,7 @@ class Todo {
       'is_completed': isCompleted,
       'created_at': DateFormat(df).format(createdAt!),
       'updated_at': DateFormat(df).format(updatedAt!),
+      'deleting': deleting,
     };
   }
 }

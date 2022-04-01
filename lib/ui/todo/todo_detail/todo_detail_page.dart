@@ -18,19 +18,17 @@ class TodoDetailPage extends StatefulWidget {
 class _TodoDetailPageState extends State<TodoDetailPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
-  late TodosNotifier _notifier;
   late Todo _todo;
   late int _index;
-  late int _todoId;
+  late int _id;
 
   @override
   void initState() {
     super.initState();
 
-    _notifier = widget.notifier;
     _index = widget.index;
     _todo = widget.notifier.todos[_index];
-    _todoId = widget.notifier.todos[_index].todoId!;
+    _id = widget.notifier.todos[_index].todoId!;
 
     _titleController.text = _todo.title;
 
@@ -49,27 +47,26 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
           title: const Text(
             "Edit Todo",
           ),
+          backgroundColor: Colors.black.withOpacity(0.2),
         ),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Card(
-                color: Color.fromARGB(255, 235, 235, 235),
+                color: const Color.fromARGB(255, 235, 235, 235),
                 child: ListTile(
                   title: TextFormField(
                     autofocus: false,
                     controller: _titleController,
-                    style:
-                        _titleController.text == notifier.getTodo(_todoId).title
-                            ? const TextStyle(color: Colors.black)
-                            : const TextStyle(color: Colors.red),
+                    style: _titleController.text == notifier.getTodo(_id).title
+                        ? const TextStyle(color: Colors.black)
+                        : const TextStyle(color: Colors.red),
                     decoration: const InputDecoration(
                       labelText: 'タイトル',
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                     ),
                   ),
-                  trailing: _titleController.text ==
-                          notifier.getTodo(_todoId).title
+                  trailing: _titleController.text == notifier.getTodo(_id).title
                       ? const IconButton(
                           icon: Icon(Icons.save_rounded),
                           onPressed: null,
@@ -80,19 +77,19 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                           onPressed: () => {
                             if (_titleController.text.isNotEmpty &&
                                 (_titleController.text !=
-                                    notifier.getTodo(_todoId).title))
+                                    notifier.getTodo(_id).title))
                               {
                                 notifier.update(
                                   Todo(
-                                    todoId: notifier.getTodo(_todoId).todoId,
+                                    todoId: notifier.getTodo(_id).todoId,
                                     title: _titleController.text,
                                     description:
-                                        notifier.getTodo(_todoId).description,
-                                    createdAt:
-                                        notifier.getTodo(_todoId).createdAt,
-                                    updatedAt: DateTime.now(),
+                                        notifier.getTodo(_id).description,
                                     isCompleted:
-                                        notifier.getTodo(_todoId).isCompleted,
+                                        notifier.getTodo(_id).isCompleted,
+                                    createdAt: notifier.getTodo(_id).createdAt,
+                                    updatedAt: DateTime.now(),
+                                    deleting: 0,
                                   ),
                                 ),
                               }
@@ -101,13 +98,13 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                 ),
               ),
               Card(
-                color: Color.fromARGB(255, 235, 235, 235),
+                color: const Color.fromARGB(255, 235, 235, 235),
                 child: ListTile(
                   title: TextFormField(
                     autofocus: false,
                     controller: _descController,
                     style: _descController.text ==
-                            notifier.getTodo(_todoId).description
+                            notifier.getTodo(_id).description
                         ? const TextStyle(color: Colors.black)
                         : const TextStyle(color: Colors.red),
                     decoration: const InputDecoration(
@@ -117,7 +114,7 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                   ),
                   trailing: _descController.text == "" ||
                           _descController.text ==
-                              notifier.getTodo(_todoId).description
+                              notifier.getTodo(_id).description
                       ? const IconButton(
                           icon: Icon(Icons.save_rounded),
                           onPressed: null,
@@ -128,18 +125,18 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                           onPressed: () => {
                             if (_descController.text.isNotEmpty &&
                                 (_descController.text !=
-                                    notifier.getTodo(_todoId).description))
+                                    notifier.getTodo(_id).description))
                               {
                                 notifier.update(
                                   Todo(
-                                    todoId: notifier.getTodo(_todoId).todoId,
-                                    title: notifier.getTodo(_todoId).title,
+                                    todoId: notifier.getTodo(_id).todoId,
+                                    title: notifier.getTodo(_id).title,
                                     description: _descController.text,
-                                    createdAt:
-                                        notifier.getTodo(_todoId).createdAt,
+                                    createdAt: notifier.getTodo(_id).createdAt,
                                     updatedAt: DateTime.now(),
                                     isCompleted:
-                                        notifier.getTodo(_todoId).isCompleted,
+                                        notifier.getTodo(_id).isCompleted,
+                                    deleting: 0,
                                   ),
                                 ),
                               }
@@ -148,36 +145,90 @@ class _TodoDetailPageState extends State<TodoDetailPage> {
                 ),
               ),
               Card(
-                color: Color.fromARGB(255, 235, 235, 235),
+                color: const Color.fromARGB(255, 235, 235, 235),
                 child: ListTile(
                   title: const Text("Completed"),
                   trailing: IconButton(
-                    icon: notifier.getTodo(_todoId).isCompleted == 0
+                    icon: notifier.getTodo(_id).isCompleted == 0
                         ? const Icon(Icons.check_box_outline_blank)
                         : const Icon(Icons.check_box_outlined,
                             color: Colors.green),
                     onPressed: () => {
-                      notifier.changeState(notifier.getTodo(_todoId)),
+                      notifier.changeState(notifier.getTodo(_id)),
                     },
                   ),
                 ),
               ),
               Card(
-                color: Color.fromARGB(255, 235, 235, 235),
+                color: const Color.fromARGB(255, 235, 235, 235),
                 child: ListTile(
                   title: const Text("作成日時"),
                   subtitle: Text(
-                    DateFormat(df).format(notifier.getTodo(_todoId).createdAt!),
+                    DateFormat(df).format(notifier.getTodo(_id).createdAt!),
                   ),
                 ),
               ),
               Card(
-                color: Color.fromARGB(255, 235, 235, 235),
+                color: const Color.fromARGB(255, 235, 235, 235),
                 child: ListTile(
                   title: const Text("更新日時"),
                   subtitle: Text(
-                    DateFormat(df).format(notifier.getTodo(_todoId).updatedAt!),
+                    DateFormat(df).format(notifier.getTodo(_id).updatedAt!),
                   ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 244, 53, 53),
+                child: ListTile(
+                  title: const Text(
+                    "Todoを削除",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () => {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) {
+                        return AlertDialog(
+                          title: const Text("Todoを削除しますか？"),
+                          content: const Text("削除すると元に戻すことはできません。"),
+                          actions: [
+                            TextButton(
+                              child: const Text("キャンセル"),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                            TextButton(
+                              child: const Text("削除"),
+                              onPressed: () => {
+                                notifier.update(
+                                  Todo(
+                                    todoId: notifier.getTodo(_id).todoId,
+                                    title: notifier.getTodo(_id).title,
+                                    description:
+                                        notifier.getTodo(_id).description,
+                                    createdAt: notifier.getTodo(_id).createdAt,
+                                    updatedAt: DateTime.now(),
+                                    isCompleted:
+                                        notifier.getTodo(_id).isCompleted,
+                                    deleting: 1,
+                                  ),
+                                ),
+                                Future.delayed(
+                                  const Duration(seconds: 2),
+                                  () {
+                                    notifier.delete(_id);
+                                  },
+                                ),
+                                Navigator.pop(context),
+                                Navigator.pop(context),
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  },
                 ),
               ),
             ],

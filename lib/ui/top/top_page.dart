@@ -31,11 +31,12 @@ class _KnowledgeHomePageState extends State<KnowledgeHomePage> {
             ? ListView(
                 children: [
                   _menuItem(context, "Todo tool",
-                      Icon(Icons.check_box_outlined), "/todolist"),
-                  _menuItem(context, "Poke API", Icon(Icons.api), "/pokelist"),
-                  _menuItem(context, "メニュー3", Icon(Icons.room), "TBD"),
-                  _menuItem(context, "メニュー4", Icon(Icons.room), "TBD"),
-                  _menuItem(context, "メニュー5", Icon(Icons.room), "TBD"),
+                      const Icon(Icons.check_box_outlined), "/todolist"),
+                  _menuItem(
+                      context, "Poke API", const Icon(Icons.api), "/pokelist"),
+                  _menuItem(context, "メニュー3", const Icon(Icons.room), "TBD"),
+                  _menuItem(context, "メニュー4", const Icon(Icons.room), "TBD"),
+                  _menuItem(context, "メニュー5", const Icon(Icons.room), "TBD"),
                 ],
               )
             : const Settings(),
@@ -72,12 +73,12 @@ class _KnowledgeHomePageState extends State<KnowledgeHomePage> {
         child: Row(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(10.0),
               child: icon,
             ),
             Text(
               title,
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
           ],
         ),
